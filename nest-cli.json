@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json.schemastore.org/nest-cli",
+  "collection": "@nestjs/schematics",
+  "sourceRoot": "src",
+  "compilerOptions": {
+    "builder": {
+      "type": "swc",
+      "options": {
+        "swcrcPath": ".swcrc"
+      }
+    },
+    "typeCheck": true,
+    "plugins": [
+      {
+        "name": "@nestjs/swagger",
+        "options": {
+          "classValidatorShim": true,
+          "introspectComments": true
+        }
+      }
+    ],
+    "assets": [
+      {
+        "watchAssets": true,
+        "include": "module/mailer/templates/**/*.html"
+      },
+      {
+        "watchAssets": true,
+        "include": "module/op/siwe/**/*.html"
+      }
+    ]
+  }
+}

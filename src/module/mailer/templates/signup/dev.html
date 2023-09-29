@@ -1,0 +1,158 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      .code {
+        font-family: monospace;
+        color: #00ff00;
+        transition: all 0.2s ease-in-out;
+      }
+      .code:hover {
+        color: #fff;
+        background-color: #136513;
+      }
+      .icon {
+        transition: all 0.2s ease-in-out;
+      }
+      .icon:hover {
+        opacity: 0.5;
+      }
+    </style>
+  </head>
+  <body class="px-2 py-4 mx-auto relative" style="max-width: 960px">
+    <section class="container mx-auto">
+      <header>
+        <table class="w-full bg-black">
+          <tbody>
+            <tr>
+              <td class="p-5">
+                <img
+                  src="https://4everland.xyz/ipfs/bafkreigbl52mbuduf4jod74u5uyeqairqq3st27456sb5bgdpxepfsroaa"
+                  alt="Crossbell"
+                  style="height: 50px"
+                />
+                <p class="text-sm text-white font-[200]">
+                  Own Your Social Activities
+                </p>
+              </td>
+              <td class="text-right p-2">
+                <img
+                  src="https://4everland.xyz/ipfs/bafkreibd7e5sqpuou7r3iqjoabqgq4cfm5dbhi6ri64jzk3aa53fj7at3m"
+                  alt="Crossbell"
+                  class="float-right"
+                  style="height: 100px"
+                />
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </header>
+
+      <article class="my-5 p-5">
+        <p class="my-5 text-4xl font-bold">Hi {{email}},</p>
+        <p class="my-4">
+          Welcome to join
+          <a href="https://crossbell.io" class="font-bold">Crossbell</a>!
+        </p>
+        <p class="my-4">
+          We are honored that you trust us for your Web3 journey. Crossbell is a
+          platform for owning your social activities, composed of an
+          EVM-compatible blockchain and a set of smart contracts.
+        </p>
+        <p class="my-4">
+          To verify your email address, please enter the following code in the
+          verification step:
+        </p>
+        <p class="my-6 text-4xl font-bold">
+          <span class="code">{{code}}</span>
+        </p>
+        <p class="my-4">
+          The code will expire in 10 minutes. If you did not request this
+          verification, please ignore this email.
+        </p>
+        <p class="mt-10 mb-4">Best,</p>
+        <p class="mb-4">Crossbell Team</p>
+      </article>
+    </section>
+
+    <section class="container mx-auto text-center text-black">
+      <div class="mx-auto my-4">
+        <a
+          href="https://discord.gg/4GCwDsruyj"
+          title="Discord"
+          class="inline-block"
+        >
+          <img
+            src="https://4everland.xyz/ipfs/bafkreig3dsbshg5zo7rpriunmay3qyvovb6cwxqzswbycv765okpnh76ti"
+            alt="Discord"
+            width="30px"
+            class="mx-2 icon"
+          />
+        </a>
+
+        <a
+          href="https://twitter.com/_Crossbell"
+          title="Twitter"
+          class="inline-block"
+        >
+          <img
+            src="https://4everland.xyz/ipfs/bafkreicyydx22z2ibaepopjc7hvylmzqwhiwckutmd5rdv6bjxw5nhiqyi"
+            alt="Twitter"
+            width="30px"
+            class="mx-2 icon"
+          />
+        </a>
+
+        <a
+          href="https://youtube.com/channel/UCs_f32UpeFk2CM8hzF7Q61Q"
+          title="YouTube"
+          class="inline-block"
+        >
+          <img
+            src="https://4everland.xyz/ipfs/bafkreig4lj72yvmxqs6iftcu6pbiuldrfuz4ohw2q26hmqwhwvhdffsaxa"
+            alt="YouTube"
+            width="30px"
+            class="mx-2 icon"
+          />
+        </a>
+
+        <a
+          href="https://t.me/+RBF2McON3z81YzFh"
+          title="Telegram"
+          class="inline-block"
+        >
+          <img
+            src="https://4everland.xyz/ipfs/bafkreiflzfktnyasgahlixwobd55o647ctf7i2lvbhzfqejxa4s7fb432i"
+            alt="Telegram"
+            width="30px"
+            class="mx-2 icon"
+          />
+        </a>
+
+        <a
+          href="https://github.com/Crossbell-Box"
+          title="GitHub"
+          class="inline-block"
+        >
+          <img
+            src="https://4everland.xyz/ipfs/bafkreieickbc6opyc57vi2v6ki2l5qszv3a5tp2aoghpnr745ol23coa4i"
+            alt="GitHub"
+            width="30px"
+            class="mx-2 icon"
+          />
+        </a>
+      </div>
+      <p class="mb-4 text-sm">
+        If you have any questions, please contact us at
+        <a href="mailto:contact@crossbell.io" class="underline text-black"
+          >contact@crossbell.io</a
+        >.
+      </p>
+      <p class="pb-4 text-xs text-gray-700">
+        Copyright © 2022-2023 Crossbell. All rights reserved.
+      </p>
+    </section>
+  </body>
+</html>

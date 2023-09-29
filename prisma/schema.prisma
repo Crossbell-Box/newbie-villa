@@ -1,0 +1,55 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["interactiveTransactions", "referentialIntegrity", "fullTextSearch", "metrics", "tracing", "orderByNulls"]
+}
+
+generator nestjsDto {
+  provider                      = "prisma-generator-nestjs-dto"
+  output                        = "../src/module/http/generated"
+  // outputToNestJsResourceStructure = "true"
+  exportRelationModifierClasses = "false"
+  reExport                      = "true"
+  createDtoPrefix               = "Create"
+  updateDtoPrefix               = "Update"
+  dtoSuffix                     = "Dto"
+  entityPrefix                  = ""
+  entitySuffix                  = "Entity"
+  fileNamingStyle               = "camel"
+  // enumAsSchema                  = "true"
+}
+
+datasource db {
+  provider             = "postgresql"
+  url                  = env("DATABASE_URL")
+  referentialIntegrity = "prisma"
+}
+
+model EmailUser {
+  email        String @unique @map("email")
+  /// @DtoEntityHidden
+  /// @HideField({ input: true, output: true })
+  passwordHash String @map("password_hash")
+
+  characterId Int        @unique
+
+  // more props
+  characterWithdrawnAt DateTime? @map("character_withdrawn_at")
+  characterWithdrawnTo String?   @map("character_withdrawn_to")
+  csb                  String?   @map("csb")
+
+  createdAt DateTime  @map("created_at")
+  updatedAt DateTime  @map("updated_at")
+  deletedAt DateTime? @map("deleted_at")
+
+  @@id([email])
+  @@index([characterId])
+  @@index([characterWithdrawnAt])
+  @@index([characterWithdrawnTo])
+  @@index([createdAt(sort: Desc)])
+  @@index([updatedAt(sort: Desc)])
+  @@index([deletedAt(sort: Desc)])
+  @@map("email_user")
+}

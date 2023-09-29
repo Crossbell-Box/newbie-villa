@@ -1,0 +1,28 @@
+
+
+SELECT period as startTime, sum(sum) total, ARRAY_AGG(sum) count_list, ARRAY_AGG(source) period_list
+FROM 
+-- aggregate function calls cannot be nested
+(SELECT COUNT(*)  sum, source , period
+  from 
+    (SELECT case 
+      when created_at >=NOW() - '1 day'::INTERVAL then NOW() - '1 day'::INTERVAL
+      when created_at >= NOW() - '2 day'::INTERVAL then NOW() - '2 day'::INTERVAL
+      when created_at >= NOW() - '3 day'::INTERVAL then NOW() - '3 day'::INTERVAL
+      when created_at >= NOW() - '4 day'::INTERVAL then NOW() - '4 day'::INTERVAL
+      when created_at >= NOW() - '5 day'::INTERVAL then NOW() - '5 day'::INTERVAL
+      when created_at >= NOW() - '6 day'::INTERVAL then NOW() - '6 day'::INTERVAL
+      when created_at >= NOW() - '7 day'::INTERVAL then NOW() - '7 day'::INTERVAL
+      else  make_timestamptz(2022, 1, 1, 0, 0, 0) 
+    end as period, 
+    (content->>'sources')::json->>0 as source from
+    metadata join note on metadata.uri = note.uri
+      WHERE length(content->>'sources')>0
+            and type = 'NOTE'
+    )
+  as innertable
+GROUP BY  source, period
+ ORDER BY source,period desc)
+  as innertable2
+GROUP BY period
+ORDER BY period
