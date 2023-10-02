@@ -2,7 +2,6 @@ import { Injectable, Logger } from '@nestjs/common';
 import { createContract, Contract } from 'crossbell';
 import { setJsonRpcAddress } from 'crossbell/network';
 import assert from 'assert';
-import { isAddress } from 'viem';
 
 export type ContractType = 'readonly' | 'newbie-villa';
 
