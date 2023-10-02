@@ -7,7 +7,7 @@ import {
   Matches,
   MaxLength,
 } from 'class-validator';
-import { CharacterMetadata } from 'crossbell.js';
+import { CharacterMetadata } from 'crossbell';
 import { TransactionResponse } from '../base/base.dto';
 
 export class SetHandleBody {

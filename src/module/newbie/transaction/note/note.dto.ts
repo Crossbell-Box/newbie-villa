@@ -1,6 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { IsEnum, IsInt, IsOptional } from 'class-validator';
-import { LinkItemType, NoteMetadata } from 'crossbell.js';
+import { LinkItemType, NoteMetadata } from 'crossbell';
 import { TransactionResponse } from '../base/base.dto';
 
 class NoteLinkItem {

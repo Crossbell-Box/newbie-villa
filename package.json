@@ -1,8 +1,6 @@
 {
   "name": "crossbell-newbie-villa",
-  "version": "0.0.1",
-  "description": "",
-  "author": "",
+  "version": "1.0.0",
   "private": true,
   "license": "UNLICENSED",
   "scripts": {
@@ -63,8 +61,6 @@
     "class-transformer": "^0.5.1",
     "class-validator": "^0.14.0",
     "crossbell": "^1.6.4",
-    "crossbell.js": "^0.19.18",
-    "crossbell.js-legacy": "npm:crossbell.js@0.7.6",
     "ethers": "5.7.2",
     "fastify": "^4.23.2",
     "google-auth-library": "^9.0.0",
