@@ -44,7 +44,7 @@ export class NewbieJwtController {
   constructor(private jwtService: NewbieJwtService) {}
 
   @Throttle({ default: { ttl: minutes(1), limit: 2 } })
-  @Post('/newbie/account/signup/email')
+  @Post('/account/signup/email')
   @HttpCode(HttpStatus.CREATED)
   @ApiOperation({
     summary:
@@ -59,7 +59,7 @@ export class NewbieJwtController {
     return { ok };
   }
 
-  @Post('/newbie/account/signup/email/verify')
+  @Post('/account/signup/email/verify')
   @HttpCode(HttpStatus.OK)
   @ApiOperation({
     summary: 'Check if the verify-code is valid for email registration',
@@ -74,7 +74,7 @@ export class NewbieJwtController {
   }
 
   @Throttle({ default: { ttl: minutes(10), limit: 1 } })
-  @Put('/newbie/account/signup')
+  @Put('/account/signup')
   @HttpCode(HttpStatus.CREATED)
   @ApiOperation({ summary: 'Register a new email user' })
   async signup(@Body() body: EmailSignUpBody): Promise<TokenResponse> {
@@ -90,7 +90,7 @@ export class NewbieJwtController {
   }
 
   @Throttle({ default: { ttl: minutes(5), limit: 5 } })
-  @Post('/newbie/account/signin')
+  @Post('/account/signin')
   @HttpCode(HttpStatus.OK)
   @ApiOperation({ summary: 'Log in as an email user' })
   async signin(@Body() body: EmailSignInBody): Promise<TokenResponse> {
@@ -101,7 +101,7 @@ export class NewbieJwtController {
   }
 
   @Throttle({ default: { ttl: minutes(1), limit: 2 } })
-  @Post('/newbie/account/reset-password/email')
+  @Post('/account/reset-password/email')
   @HttpCode(HttpStatus.OK)
   @ApiOperation({
     summary:
@@ -116,7 +116,7 @@ export class NewbieJwtController {
     return { ok };
   }
 
-  @Post('/newbie/account/reset-password/email/verify')
+  @Post('/account/reset-password/email/verify')
   @HttpCode(HttpStatus.OK)
   @ApiOperation({
     summary: 'Check if the verify-code is valid for password reset',
@@ -130,7 +130,7 @@ export class NewbieJwtController {
     return { ok };
   }
 
-  @Post('/newbie/account/reset-password')
+  @Post('/account/reset-password')
   @HttpCode(HttpStatus.OK)
   @ApiOperation({ summary: 'Reset password' })
   async resetPassword(
@@ -146,7 +146,7 @@ export class NewbieJwtController {
     return { ok };
   }
 
-  @Get('/newbie/account')
+  @Get('/account')
   @UseGuards(NewbieJwtAuthGuard)
   @HttpCode(HttpStatus.OK)
   @ApiBearerAuth()
@@ -160,7 +160,7 @@ export class NewbieJwtController {
     return user;
   }
 
-  @Delete('/newbie/account')
+  @Delete('/account')
   @UseGuards(NewbieJwtAuthGuard)
   @HttpCode(HttpStatus.NO_CONTENT)
   @ApiBearerAuth()
@@ -187,7 +187,7 @@ export class NewbieJwtController {
 
   /// special endpoint for mastodon
   /// @nyacandy
-  @Put('/newbie/account/mastodon_signup')
+  @Put('/account/mastodon_signup')
   @HttpCode(HttpStatus.CREATED)
   @ApiExcludeEndpoint()
   async mastodonSignup(
@@ -206,7 +206,7 @@ export class NewbieJwtController {
 
   /// special endpoint for mastodon
   /// @nyacandy
-  @Get('/newbie/account/mastodon_get_account')
+  @Get('/account/mastodon_get_account')
   @HttpCode(HttpStatus.OK)
   @ApiExcludeEndpoint()
   async mastodonGetAccount(
@@ -226,7 +226,7 @@ export class NewbieJwtController {
 
   /// special endpoint for Wondera
   /// https://www.notion.so/rss3/Wondera-x-Crossbell-ecd8e58dbff14d9eb493fcfe8e0acdaa?d=92c471aabc5e4e8b96b2dc279dec28f3#7ab410d6dcb646dc8a408f36b1816434
-  @Put('/newbie/account/wondera_signup')
+  @Put('/account/wondera_signup')
   @HttpCode(HttpStatus.CREATED)
   @ApiExcludeEndpoint()
   async wonderaSignup(

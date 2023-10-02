@@ -36,7 +36,7 @@ import { NewbieJwtAuthGuard } from '../../newbie-jwt/newbie-jwt.guard';
 export class NewbieCharacterController {
   constructor(private readonly characterService: NewbieCharacterService) {}
 
-  // @Post('/newbie/contract/characters/me/handle')
+  // @Post('/contract/characters/me/handle')
   // @ApiOperation({ summary: 'Set a new handle for character' })
   // async setHandle(
   //   @CurrentUser() user: EmailUser,
@@ -52,7 +52,7 @@ export class NewbieCharacterController {
   //   };
   // }
 
-  @Post('/newbie/contract/characters/me/metadata')
+  @Post('/contract/characters/me/metadata')
   @ApiOperation({ summary: 'Set metadata for character' })
   async setCharacterMetadata(
     @CurrentUser() user: EmailUser,

@@ -35,7 +35,7 @@ import { WebException } from '@/utils/exception';
 export class NewbieNoteController {
   constructor(private readonly noteService: NewbieNoteService) {}
 
-  @Put('/newbie/contract/notes')
+  @Put('/contract/notes')
   @ApiOperation({ summary: 'Post a new note' })
   async postNote(
     @CurrentUser() user: EmailUser,
@@ -89,7 +89,7 @@ export class NewbieNoteController {
     }
   }
 
-  @Post('/newbie/contract/notes/:noteId/metadata')
+  @Post('/contract/notes/:noteId/metadata')
   @ApiOperation({ summary: 'Set a new metadata for a note' })
   async setNoteMetadata(
     @CurrentUser() user: EmailUser,
@@ -118,7 +118,7 @@ export class NewbieNoteController {
     };
   }
 
-  @Post('/newbie/contract/notes/:noteId/lock')
+  @Post('/contract/notes/:noteId/lock')
   @ApiOperation({ summary: 'Lock a note' })
   async lockNote(
     @CurrentUser() user: EmailUser,
@@ -134,7 +134,7 @@ export class NewbieNoteController {
     };
   }
 
-  @Delete('/newbie/contract/notes/:noteId')
+  @Delete('/contract/notes/:noteId')
   @ApiOperation({ summary: 'Delete a note' })
   async deleteNote(
     @CurrentUser() user: EmailUser,

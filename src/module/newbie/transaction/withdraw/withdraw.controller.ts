@@ -19,7 +19,7 @@ import { GetWithdrawProofsResponse } from './withdraw.dto';
 export class NewbieWithdrawController {
   constructor(private readonly withdrawService: NewbieWithdrawService) {}
 
-  @Get('/newbie/account/withdraw/proof')
+  @Get('/account/withdraw/proof')
   @ApiOperation({
     summary:
       'Get proofs for withdraw to call `withdraw` contract method on client',

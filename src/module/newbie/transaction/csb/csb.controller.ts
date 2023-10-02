@@ -19,7 +19,7 @@ import { NewbieCsbService } from './csb.service';
 export class NewbieCsbController {
   constructor(private readonly csbService: NewbieCsbService) {}
 
-  @Get('/newbie/account/balance')
+  @Get('/account/balance')
   @ApiOperation({ summary: 'Get the balance of csb' })
   async getCsbBalance(
     @CurrentUser() user: EmailUser,
@@ -31,7 +31,7 @@ export class NewbieCsbController {
     };
   }
 
-  @Post('/newbie/account/balance/refill')
+  @Post('/account/balance/refill')
   @ApiOperation({ summary: 'Refill the balance of csb (once per day)' })
   async refillCsbBalance(
     @CurrentUser() user: EmailUser,

@@ -19,7 +19,7 @@ import { TipBody, TipResponse } from './tip.dto';
 export class NewbieTipController {
   constructor(private readonly tipService: NewbieTipService) {}
 
-  @Post('/newbie/contract/tips')
+  @Post('/contract/tips')
   @ApiOperation({
     summary: "Send a tip to a character (and for this character's note)",
   })

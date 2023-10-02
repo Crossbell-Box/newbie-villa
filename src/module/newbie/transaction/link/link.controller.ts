@@ -40,7 +40,7 @@ import { isAddress } from 'ethers/lib/utils';
 export class NewbieLinkController {
   constructor(private readonly linkService: NewbieLinkService) {}
 
-  @Put('/newbie/contract/links/characters/:toCharacterIdOrToAddress/:linkType')
+  @Put('/contract/links/characters/:toCharacterIdOrToAddress/:linkType')
   @ApiOperation({ summary: 'Link a character' })
   async linkCharacter(
     @CurrentUser() user: EmailUser,
@@ -85,7 +85,7 @@ export class NewbieLinkController {
     }
   }
 
-  @Put('/newbie/contract/links/characters')
+  @Put('/contract/links/characters')
   @ApiOperation({ summary: 'Link characters in batch' })
   async linkCharactersInBatch(
     @CurrentUser() user: EmailUser,
@@ -107,7 +107,7 @@ export class NewbieLinkController {
     };
   }
 
-  @Delete('/newbie/contract/links/characters/:toCharacterId/:linkType')
+  @Delete('/contract/links/characters/:toCharacterId/:linkType')
   @ApiOperation({ summary: 'Unlink a character' })
   async unlinkCharacter(
     @CurrentUser() user: EmailUser,
@@ -127,7 +127,7 @@ export class NewbieLinkController {
     };
   }
 
-  @Put('/newbie/contract/links/notes/:toCharacterId/:toNoteId/:linkType')
+  @Put('/contract/links/notes/:toCharacterId/:toNoteId/:linkType')
   @ApiOperation({ summary: 'Link a note' })
   async linkNote(
     @CurrentUser() user: EmailUser,
@@ -151,7 +151,7 @@ export class NewbieLinkController {
     };
   }
 
-  @Delete('/newbie/contract/links/notes/:toCharacterId/:toNoteId/:linkType')
+  @Delete('/contract/links/notes/:toCharacterId/:toNoteId/:linkType')
   @ApiOperation({ summary: 'Unlink a note' })
   async unlinkNote(
     @CurrentUser() user: EmailUser,
