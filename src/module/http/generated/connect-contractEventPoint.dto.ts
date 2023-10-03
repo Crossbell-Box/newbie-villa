@@ -1,5 +1,3 @@
-
-  export class ConnectContractEventPointDto {
-    name?: string;
-  }
-  
+export class ConnectContractEventPointDto {
+  name?: string;
+}

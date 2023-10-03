@@ -1,11 +1,34 @@
-import { Injectable, Logger } from '@nestjs/common';
-import { toBytes, keccak256, encodePacked } from 'viem';
+import {
+  Injectable,
+  Logger,
+  OnApplicationShutdown,
+  OnModuleInit,
+} from '@nestjs/common';
+import { toBytes, keccak256, encodePacked, isAddressEqual } from 'viem';
+import { Abi } from 'crossbell';
+
+import { getAbiEvent } from '@/utils/get-abi-event';
+import { getDateOfBlock } from '@/utils/get-date-of-block';
+
 import { NEWBIE_VILLA_CONTRACT_ADDRESS } from '../../newbie.constants';
 import { NewbieTransactionBaseService } from '../base/base.service';
 
 @Injectable()
-export class NewbieWithdrawService extends NewbieTransactionBaseService {
+export class NewbieWithdrawService
+  extends NewbieTransactionBaseService
+  implements OnModuleInit, OnApplicationShutdown
+{
   private readonly logger = new Logger(NewbieWithdrawService.name);
+
+  async onModuleInit() {
+    this.logger.debug('onModuleInit: start to watch contract events');
+    this.startWatch();
+  }
+
+  async onApplicationShutdown() {
+    this.logger.debug('onApplicationShutdown: unwatch contract events');
+    await super.onApplicationShutdown();
+  }
 
   /**
    * Withdraw a character to a new address from the newbie villa.
@@ -40,5 +63,47 @@ export class NewbieWithdrawService extends NewbieTransactionBaseService {
       expires,
       proof,
     };
+  }
+
+  private startWatch() {
+    const transfer = getAbiEvent(Abi.entry, 'Transfer');
+
+    this.getHistoryAndListen({
+      event: transfer,
+      address: NEWBIE_VILLA_CONTRACT_ADDRESS,
+      onLogs: async (logs) => {
+        for (const log of logs) {
+          const fromAddress = log.args.from;
+          const toAddress = log.args.to;
+          const characterId = log.args.tokenId;
+
+          if (
+            fromAddress &&
+            toAddress &&
+            characterId &&
+            isAddressEqual(fromAddress, NEWBIE_VILLA_CONTRACT_ADDRESS)
+          ) {
+            try {
+              this.logger.verbose(
+                `Withdraw character [${characterId}]: from [${fromAddress}] to [${toAddress}]`,
+              );
+
+              const date = await getDateOfBlock(log.blockNumber);
+
+              await this.prisma.emailUser.update({
+                data: {
+                  updatedAt: date,
+                  characterWithdrawnAt: date,
+                  characterWithdrawnTo: toAddress,
+                },
+                where: { characterId: Number(characterId) },
+              });
+            } catch (err) {
+              this.logger.error(err);
+            }
+          }
+        }
+      },
+    });
   }
 }
