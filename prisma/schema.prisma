@@ -53,3 +53,8 @@ model EmailUser {
   @@index([deletedAt(sort: Desc)])
   @@map("email_user")
 }
+
+model ContractEventPoint {
+  name        String @id @unique
+  blockNumber BigInt
+}
