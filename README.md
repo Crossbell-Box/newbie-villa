@@ -1,4 +1,15 @@
-## Development
+# Crossbell Newbie Villa Backend Service
+
+Newbie Villa facilitates a smooth transition from Web2 to Web3 on Crossbell. Users can start by registering with their email, automatically receiving a Character for on-chain social interactions. As users delve deeper, they can claim their Characters via a wallet address, unlocking the broader Web3 social realm on Crossbell.
+
+## Features
+
+- Seamless Web3 migration with familiar email authentication.
+- Automatic Character assignment for new registrations.
+- On-chain social interactions recorded, with server covering initial gas fees.
+- Progress to a genuine Web3 social user by claiming your Character with a wallet address.
+
+## Getting Started
 
 Install deps:
 
@@ -34,12 +45,6 @@ Start server:
 npm run start:dev
 ```
 
-Start server without running crossbell event listeners:
-
-```bash
-DISABLE_CHAIN_EVENT_LISTENER=true npm run start:dev
-```
-
 ## Deployment
 
 Docker:
@@ -64,7 +69,7 @@ npm run build
 ./start_prod.sh
 ```
 
-## Migrate database
+### Migrate database
 
 In development:
 
@@ -77,3 +82,7 @@ In production:
 ```bash
 npm run prisma:migrate:deploy
 ```
+
+## Contribute
+
+Feel free to contribute to the Newbie Villa service to help lower the barrier between Web2 and Web3!
