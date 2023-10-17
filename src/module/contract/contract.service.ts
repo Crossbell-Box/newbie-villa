@@ -38,16 +38,16 @@ export class CrossbellContractService {
 
       case 'newbie-villa': {
         const privateKey = process.env
-          .NEWBIE_VILLA_CONTRACT_PRIVATE_KEY as `0x${string}`;
+          .NEWBIE_VILLA_WALLET_PRIVATE_KEY as `0x${string}`;
 
         assert(
           privateKey,
-          'NEWBIE_VILLA_CONTRACT_PRIVATE_KEY is missing from environment variables',
+          'NEWBIE_VILLA_WALLET_PRIVATE_KEY is missing from environment variables',
         );
 
         assert(
           privateKey.startsWith('0x'),
-          `Invalid NEWBIE_VILLA_CONTRACT_PRIVATE_KEY format. Please ensure you prepend '0x' to the beginning of your key`,
+          `Invalid NEWBIE_VILLA_WALLET_PRIVATE_KEY format. Please ensure you prepend '0x' to the beginning of your key`,
         );
 
         return privateKey;
