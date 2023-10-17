@@ -8,7 +8,10 @@ import { Injectable, Logger } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import argon from 'argon2';
 import Redis from 'ioredis';
-import { NEWBIE_VILLA_WALLET_ADDRESS } from '../newbie.constants';
+import {
+  NEWBIE_VILLA_CONTRACT_ADDRESS,
+  NEWBIE_VILLA_WALLET_ADDRESS,
+} from '../newbie.constants';
 import { JwtPayload } from './newbie-jwt.type';
 // @ts-ignore
 import tr46 from 'tr46';
@@ -51,14 +54,7 @@ export class NewbieJwtService {
     const passwordHash = await argon.hash(password);
 
     // create a new character
-    const randomHandle = this.generateHandleFromEmail(characterName);
-    const createdCharacter = await this.contract.character.create({
-      owner: NEWBIE_VILLA_WALLET_ADDRESS,
-      handle: randomHandle,
-      metadataOrUri: {
-        name: characterName,
-      },
-    });
+    const createdCharacter = await this.createCharacter({ characterName });
 
     // create a new user
     const user = await this.prisma.emailUser.create({
@@ -309,14 +305,7 @@ export class NewbieJwtService {
     const passwordHash = await argon.hash(password);
 
     // create a new character
-    const randomHandle = this.generateHandleFromEmail(characterName);
-    const createdCharacter = await this.contract.character.create({
-      owner: NEWBIE_VILLA_WALLET_ADDRESS,
-      handle: randomHandle,
-      metadataOrUri: {
-        name: characterName,
-      },
-    });
+    const createdCharacter = await this.createCharacter({ characterName });
 
     // create a new user
     const user = await this.prisma.emailUser.create({
@@ -363,14 +352,7 @@ export class NewbieJwtService {
     const passwordHash = await argon.hash(password);
 
     // create a new character
-    const randomHandle = this.generateHandleFromEmail(characterName);
-    const createdCharacter = await this.contract.character.create({
-      owner: NEWBIE_VILLA_WALLET_ADDRESS,
-      handle: randomHandle,
-      metadataOrUri: {
-        name: characterName,
-      },
-    });
+    const createdCharacter = await this.createCharacter({ characterName });
 
     // create a new user
     const user = await this.prisma.emailUser.create({
@@ -403,5 +385,24 @@ export class NewbieJwtService {
         characterWithdrawnTo: true,
       },
     });
+  }
+
+  private async createCharacter({ characterName }: { characterName: string }) {
+    const handle = this.generateHandleFromEmail(characterName);
+    const character = await this.contract.character.create({
+      owner: NEWBIE_VILLA_WALLET_ADDRESS,
+      handle,
+      metadataOrUri: { name: characterName },
+    });
+
+    if (NEWBIE_VILLA_WALLET_ADDRESS !== NEWBIE_VILLA_CONTRACT_ADDRESS) {
+      await this.contract.character.transfer({
+        fromAddress: NEWBIE_VILLA_WALLET_ADDRESS,
+        toAddress: NEWBIE_VILLA_CONTRACT_ADDRESS,
+        characterId: character.data,
+      });
+    }
+
+    return character;
   }
 }
