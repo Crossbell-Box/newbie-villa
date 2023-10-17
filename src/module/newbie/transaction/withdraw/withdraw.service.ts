@@ -10,7 +10,7 @@ import { Abi } from 'crossbell';
 import { getAbiEvent } from '@/utils/get-abi-event';
 import { getDateOfBlock } from '@/utils/get-date-of-block';
 
-import { NEWBIE_VILLA_CONTRACT_ADDRESS } from '../../newbie.constants';
+import { NEWBIE_VILLA_WALLET_ADDRESS } from '../../newbie.constants';
 import { NewbieTransactionBaseService } from '../base/base.service';
 
 @Injectable()
@@ -45,7 +45,7 @@ export class NewbieWithdrawService
         encodePacked(
           ['address', 'uint256', 'uint256', 'uint256'],
           [
-            NEWBIE_VILLA_CONTRACT_ADDRESS,
+            NEWBIE_VILLA_WALLET_ADDRESS,
             BigInt(characterId),
             BigInt(nonce),
             BigInt(expires),
@@ -70,7 +70,7 @@ export class NewbieWithdrawService
 
     this.getHistoryAndListen({
       event: transfer,
-      address: NEWBIE_VILLA_CONTRACT_ADDRESS,
+      address: NEWBIE_VILLA_WALLET_ADDRESS,
       onLogs: async (logs) => {
         for (const log of logs) {
           const fromAddress = log.args.from;
@@ -81,7 +81,7 @@ export class NewbieWithdrawService
             fromAddress &&
             toAddress &&
             characterId &&
-            isAddressEqual(fromAddress, NEWBIE_VILLA_CONTRACT_ADDRESS)
+            isAddressEqual(fromAddress, NEWBIE_VILLA_WALLET_ADDRESS)
           ) {
             try {
               this.logger.verbose(

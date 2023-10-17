@@ -8,7 +8,7 @@ import { Injectable, Logger } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import argon from 'argon2';
 import Redis from 'ioredis';
-import { NEWBIE_VILLA_CONTRACT_ADDRESS } from '../newbie.constants';
+import { NEWBIE_VILLA_WALLET_ADDRESS } from '../newbie.constants';
 import { JwtPayload } from './newbie-jwt.type';
 // @ts-ignore
 import tr46 from 'tr46';
@@ -53,7 +53,7 @@ export class NewbieJwtService {
     // create a new character
     const randomHandle = this.generateHandleFromEmail(characterName);
     const createdCharacter = await this.contract.character.create({
-      owner: NEWBIE_VILLA_CONTRACT_ADDRESS,
+      owner: NEWBIE_VILLA_WALLET_ADDRESS,
       handle: randomHandle,
       metadataOrUri: {
         name: characterName,
@@ -311,7 +311,7 @@ export class NewbieJwtService {
     // create a new character
     const randomHandle = this.generateHandleFromEmail(characterName);
     const createdCharacter = await this.contract.character.create({
-      owner: NEWBIE_VILLA_CONTRACT_ADDRESS,
+      owner: NEWBIE_VILLA_WALLET_ADDRESS,
       handle: randomHandle,
       metadataOrUri: {
         name: characterName,
@@ -365,7 +365,7 @@ export class NewbieJwtService {
     // create a new character
     const randomHandle = this.generateHandleFromEmail(characterName);
     const createdCharacter = await this.contract.character.create({
-      owner: NEWBIE_VILLA_CONTRACT_ADDRESS,
+      owner: NEWBIE_VILLA_WALLET_ADDRESS,
       handle: randomHandle,
       metadataOrUri: {
         name: characterName,
