@@ -10,7 +10,10 @@ import { Abi } from 'crossbell';
 import { getAbiEvent } from '@/utils/get-abi-event';
 import { getDateOfBlock } from '@/utils/get-date-of-block';
 
-import { NEWBIE_VILLA_WALLET_ADDRESS } from '../../newbie.constants';
+import {
+  NEWBIE_VILLA_CONTRACT_ADDRESS,
+  NEWBIE_VILLA_WALLET_ADDRESS,
+} from '../../newbie.constants';
 import { NewbieTransactionBaseService } from '../base/base.service';
 
 @Injectable()
@@ -45,7 +48,7 @@ export class NewbieWithdrawService
         encodePacked(
           ['address', 'uint256', 'uint256', 'uint256'],
           [
-            NEWBIE_VILLA_WALLET_ADDRESS,
+            NEWBIE_VILLA_CONTRACT_ADDRESS,
             BigInt(characterId),
             BigInt(nonce),
             BigInt(expires),
