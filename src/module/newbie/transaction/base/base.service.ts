@@ -130,7 +130,7 @@ export class NewbieTransactionBaseService implements OnApplicationShutdown {
         let fromBlock = BigInt(eventPoint.blockNumber) + 1n;
         let toBlock = fromBlock + step;
 
-        while (toBlock < latestBlock) {
+        while (fromBlock < latestBlock) {
           this.#logger.debug(
             `Retrieve logs for [${eventName}] from [${fromBlock}] to [${toBlock}]`,
           );

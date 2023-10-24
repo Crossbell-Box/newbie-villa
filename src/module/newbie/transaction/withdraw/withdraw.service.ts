@@ -4,16 +4,13 @@ import {
   OnApplicationShutdown,
   OnModuleInit,
 } from '@nestjs/common';
-import { toBytes, keccak256, encodePacked, isAddressEqual } from 'viem';
+import { toBytes, keccak256, encodePacked } from 'viem';
 import { Abi } from 'crossbell';
 
 import { getAbiEvent } from '@/utils/get-abi-event';
 import { getDateOfBlock } from '@/utils/get-date-of-block';
 
-import {
-  NEWBIE_VILLA_CONTRACT_ADDRESS,
-  NEWBIE_VILLA_WALLET_ADDRESS,
-} from '../../newbie.constants';
+import { NEWBIE_VILLA_CONTRACT_ADDRESS } from '../../newbie.constants';
 import { NewbieTransactionBaseService } from '../base/base.service';
 
 @Injectable()
@@ -69,40 +66,39 @@ export class NewbieWithdrawService
   }
 
   private startWatch() {
-    const transfer = getAbiEvent(Abi.entry, 'Transfer');
+    const withdraw = getAbiEvent(Abi.newbieVilla, 'Withdraw');
 
     this.getHistoryAndListen({
-      event: transfer,
-      address: NEWBIE_VILLA_WALLET_ADDRESS,
+      event: withdraw,
       onLogs: async (logs) => {
         for (const log of logs) {
-          const fromAddress = log.args.from;
           const toAddress = log.args.to;
-          const characterId = log.args.tokenId;
+          const characterId = log.args.characterId;
 
-          if (
-            fromAddress &&
-            toAddress &&
-            characterId &&
-            isAddressEqual(fromAddress, NEWBIE_VILLA_WALLET_ADDRESS)
-          ) {
-            try {
-              this.logger.verbose(
-                `Withdraw character [${characterId}]: from [${fromAddress}] to [${toAddress}]`,
-              );
+          if (toAddress && characterId) {
+            const user = await this.prisma.emailUser.findUnique({
+              where: { characterId: Number(characterId) },
+            });
 
-              const date = await getDateOfBlock(log.blockNumber);
+            if (user && user.characterWithdrawnAt === null) {
+              try {
+                this.logger.verbose(
+                  `Withdraw character [${characterId}] to [${toAddress}]`,
+                );
 
-              await this.prisma.emailUser.update({
-                data: {
-                  updatedAt: date,
-                  characterWithdrawnAt: date,
-                  characterWithdrawnTo: toAddress,
-                },
-                where: { characterId: Number(characterId) },
-              });
-            } catch (err) {
-              this.logger.error(err);
+                const date = await getDateOfBlock(log.blockNumber);
+
+                await this.prisma.emailUser.update({
+                  data: {
+                    updatedAt: date,
+                    characterWithdrawnAt: date,
+                    characterWithdrawnTo: toAddress,
+                  },
+                  where: { characterId: Number(characterId) },
+                });
+              } catch (err) {
+                this.logger.error(err);
+              }
             }
           }
         }
