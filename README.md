@@ -11,35 +11,39 @@ Newbie Villa facilitates a smooth transition from Web2 to Web3 on Crossbell. Use
 
 ## Getting Started
 
-Install deps:
+#### Install deps:
 
 ```bash
-npm i
+npm install
 ```
 
-### Database
+#### Prepare environment variables:
 
-Start DB docker:
+```bash
+copy .env.example .env
+```
+
+#### Setup wallet:
+
+You will need to create a wallet and obtain the private key and address, then fill in the environment variables: `NEWBIE_VILLA_WALLET_ADDRESS` and `NEWBIE_VILLA_WALLET_PRIVATE_KEY`.
+
+#### Setup mailer:
+
+Follow [this article](https://medium.com/@nickroach_50526/sending-emails-with-node-js-using-smtp-gmail-and-oauth2-316fe9c790a1) to obtain the needed environment variables: `MAILER_GMAIL_CLIENT_ID`, `MAILER_GMAIL_CLIENT_SECRET`, `MAILER_GMAIL_REFRESH_TOKEN` and `MAILER_USER`.
+
+#### Start Database instance:
 
 ```bash
 npm run docker:db
 ```
 
-Migrate database and generate types in development environment:
+#### Migrate database and generate types in development environment:
 
 ```bash
 npm run prisma:migrate:dev
 ```
 
-Generate Prisma types only:
-
-```bash
-npm run prisma:generate
-```
-
-### Start server
-
-Start server:
+#### Start server:
 
 ```bash
 npm run start:dev
@@ -66,7 +70,7 @@ In Node.js Environment:
 ```
 npm install
 npm run build
-./start_prod.sh
+NODE_ENV=production node dist/main
 ```
 
 ### Migrate database
@@ -82,6 +86,28 @@ In production:
 ```bash
 npm run prisma:migrate:deploy
 ```
+
+## Modules
+
+### NewbieJWT
+
+NewbieJWT Module handles the account related features like login, register, reset password, delete account, etc.
+
+### NewbieTransaction
+
+NewbieTransaction Module handles the transactions like posting, commenting, liking, tipping, etc.
+
+### Mailer
+
+Mailer Module handles the email related features like sending verification email, sending reset password email, etc.
+
+### CsbManager
+
+CsbManager Module provides some helper functions for interacting with the $CSB.
+
+### Contract
+
+Contract Module used to initialize the contract instance.
 
 ## Contribute
 
