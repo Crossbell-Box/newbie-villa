@@ -89,26 +89,28 @@ npm run prisma:migrate:deploy
 
 ## Modules
 
-### NewbieJWT
+### [NewbieJWT](src/module/newbie/newbie-jwt/)
 
 NewbieJWT Module handles the account related features like login, register, reset password, delete account, etc.
 
-### NewbieTransaction
+### [NewbieTransaction](src/module/newbie/transaction/)
 
 NewbieTransaction Module handles the transactions like posting, commenting, liking, tipping, etc.
 
-### Mailer
+### [Mailer](src/module/mailer/)
 
 Mailer Module handles the email related features like sending verification email, sending reset password email, etc.
 
-### CsbManager
+### [CsbManager](src/module/csb-manager/)
 
 CsbManager Module provides some helper functions for interacting with the $CSB.
 
-### Contract
+### [Contract](src/module/csb-manager/)
 
 Contract Module used to initialize the contract instance.
 
 ## Contribute
 
 Feel free to contribute to the Newbie Villa service to help lower the barrier between Web2 and Web3!
+
+> 🫡 This project was initially developed by [@SongKeys](https://github.com/Songkeys). Original commit logs were deleted to protect sensitive information before open-sourcing.
