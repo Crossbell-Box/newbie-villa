@@ -87,6 +87,10 @@ In production:
 npm run prisma:migrate:deploy
 ```
 
+## Customizing Endpoints in [Crossbell React Kits](https://crossbell-dev.vercel.app)
+
+Check out the customizing guide [here](https://crossbell-dev.vercel.app/docs/customizing-endpoints).
+
 ## Modules
 
 ### [NewbieJWT](src/module/newbie/newbie-jwt/)
