@@ -49,6 +49,10 @@ npm run prisma:migrate:dev
 npm run start:dev
 ```
 
+#### Access the Swagger API docs:
+
+Once the server starts, the Swagger API docs will be available at the `/docs` path. For example, if you are running the server locally at port `3987`, you can access the docs at [http://localhost:3987/docs](http://localhost:3987/docs).
+
 ## Deployment
 
 Docker:
