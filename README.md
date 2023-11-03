@@ -113,7 +113,7 @@ Mailer Module handles the email related features like sending verification email
 
 CsbManager Module provides some helper functions for interacting with the $CSB.
 
-### [Contract](src/module/csb-manager/)
+### [Contract](src/module/contract/)
 
 Contract Module used to initialize the contract instance.
 
