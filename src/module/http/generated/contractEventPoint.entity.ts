@@ -1,4 +1,8 @@
+
+
+
+
 export class ContractEventPointEntity {
-  name?: string;
-  blockNumber?: bigint;
+  name?: string ;
+blockNumber?: bigint ;
 }
