@@ -1,17 +1,19 @@
-import { CrossbellContractService } from '@/module/contract/contract.service';
-import { CsbManagerService } from '@/module/csb-manager/csb-manager.service';
-import { PrismaService } from '@/module/prisma/prisma.service';
-import { WebException } from '@/utils/exception';
 import { InjectRedis } from '@songkeys/nestjs-redis';
 import { Injectable, Logger, OnApplicationShutdown } from '@nestjs/common';
 import { Contract, Result } from 'crossbell';
 import { BigNumber } from 'ethers';
-import Redis from 'ioredis';
 import { setTimeout } from 'timers/promises';
-import retry from 'async-retry';
-import { publicClient } from '@/utils/public-client';
 import { WatchEventParameters } from 'viem';
 import { AbiEvent } from 'abitype';
+import Redis from 'ioredis';
+import retry from 'async-retry';
+
+import { CrossbellContractService } from '@/module/contract/contract.service';
+import { CsbManagerService } from '@/module/csb-manager/csb-manager.service';
+import { PrismaService } from '@/module/prisma/prisma.service';
+import { bigIntMin } from '@/utils/bigint';
+import { WebException } from '@/utils/exception';
+import { publicClient } from '@/utils/public-client';
 
 @Injectable()
 export class NewbieTransactionBaseService implements OnApplicationShutdown {
@@ -151,7 +153,7 @@ export class NewbieTransactionBaseService implements OnApplicationShutdown {
 
           await this.prisma.contractEventPoint.update({
             where: { name: eventName },
-            data: { blockNumber: toBlock },
+            data: { blockNumber: bigIntMin(toBlock, latestBlock) },
           });
 
           fromBlock = toBlock + 1n;
