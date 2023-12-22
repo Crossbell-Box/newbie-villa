@@ -20,7 +20,9 @@ export class CrossbellContractService {
       return cached;
     } else {
       const contract = createContract(this.getPrivateKey(type), {
-        address: { cbtContract: '0x3D1b588a6Bcd728Bb61570ced6656eA4C05e404f' },
+        contractAddresses: {
+          cbt: '0x3D1b588a6Bcd728Bb61570ced6656eA4C05e404f',
+        },
       });
 
       this.logger.debug(`Create contract for ${type}`);
