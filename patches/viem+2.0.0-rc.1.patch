@@ -1,0 +1,56 @@
+diff --git a/node_modules/viem/_cjs/actions/public/watchEvent.js b/node_modules/viem/_cjs/actions/public/watchEvent.js
+index 1f8f150..4242a45 100644
+--- a/node_modules/viem/_cjs/actions/public/watchEvent.js
++++ b/node_modules/viem/_cjs/actions/public/watchEvent.js
+@@ -33,13 +33,16 @@ function watchEvent(client, { address, args, batch = true, event, events, onErro
+             const unwatch = (0, poll_js_1.poll)(async () => {
+                 if (!initialized) {
+                     try {
+-                        filter = (await (0, getAction_js_1.getAction)(client, createEventFilter_js_1.createEventFilter, 'createEventFilter')({
+-                            address,
+-                            args,
+-                            event: event,
+-                            events,
+-                            strict,
+-                        }));
++                        // Skip creating filter so that we can use `getLogs` instead of `getFilterChanges`.
++                        // https://github.com/wevm/viem/discussions/534#discussioncomment-7912794
++                        //
++                        // filter = (await (0, getAction_js_1.getAction)(client, createEventFilter_js_1.createEventFilter, 'createEventFilter')({
++                        //     address,
++                        //     args,
++                        //     event: event,
++                        //     events,
++                        //     strict,
++                        // }));
+                     }
+                     catch { }
+                     initialized = true;
+diff --git a/node_modules/viem/_esm/actions/public/watchEvent.js b/node_modules/viem/_esm/actions/public/watchEvent.js
+index 0704b70..35382c8 100644
+--- a/node_modules/viem/_esm/actions/public/watchEvent.js
++++ b/node_modules/viem/_esm/actions/public/watchEvent.js
+@@ -62,13 +62,16 @@ export function watchEvent(client, { address, args, batch = true, event, events,
+             const unwatch = poll(async () => {
+                 if (!initialized) {
+                     try {
+-                        filter = (await getAction(client, createEventFilter, 'createEventFilter')({
+-                            address,
+-                            args,
+-                            event: event,
+-                            events,
+-                            strict,
+-                        }));
++                        // Skip creating filter so that we can use `getLogs` instead of `getFilterChanges`.
++                        // https://github.com/wevm/viem/discussions/534#discussioncomment-7912794
++                        //
++                        // filter = (await getAction(client, createEventFilter, 'createEventFilter')({
++                        //     address,
++                        //     args,
++                        //     event: event,
++                        //     events,
++                        //     strict,
++                        // }));
+                     }
+                     catch { }
+                     initialized = true;
