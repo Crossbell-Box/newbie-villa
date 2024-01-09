@@ -39,8 +39,8 @@ export class NewbieJwtService {
     characterName: string,
   ): Promise<string> {
     // check if email is already taken
-    const has = await this.prisma.emailUser.findUnique({
-      where: { email: email },
+    const has = await this.prisma.emailUser.findFirst({
+      where: { email: { equals: email, mode: 'insensitive' } },
       select: { email: true },
     });
     if (has) {
@@ -75,8 +75,8 @@ export class NewbieJwtService {
 
   async signupVerifyEmail(email: string): Promise<boolean> {
     // check if email is already taken
-    const has = await this.prisma.emailUser.findUnique({
-      where: { email: email },
+    const has = await this.prisma.emailUser.findFirst({
+      where: { email: { equals: email, mode: 'insensitive' } },
       select: { email: true },
     });
     if (has) {
@@ -290,8 +290,8 @@ export class NewbieJwtService {
     }
 
     // check if email is already taken
-    const has = await this.prisma.emailUser.findUnique({
-      where: { email: email },
+    const has = await this.prisma.emailUser.findFirst({
+      where: { email: { equals: email, mode: 'insensitive' } },
       select: { email: true },
     });
     if (has) {
@@ -340,8 +340,8 @@ export class NewbieJwtService {
     }
 
     // check if email is already taken
-    const has = await this.prisma.emailUser.findUnique({
-      where: { email: email },
+    const has = await this.prisma.emailUser.findFirst({
+      where: { email: { equals: email, mode: 'insensitive' } },
       select: { email: true },
     });
     if (has) {
